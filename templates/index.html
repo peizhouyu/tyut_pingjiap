@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width" />  
+	<title>太原理工大学一键评教系统</title>
+	<link rel="stylesheet" href="{{ url_for('static',filename='jQuery/jquery.mobile-1.3.2.min.css') }}">
+	<script src="{{ url_for('static',filename='jQuery/jquery-1.8.3.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='jQuery/jquery.mobile-1.3.2.min.js') }}"></script>
+</head>
+<body>
+	<div data-role="page" data-theme="b">
+
+  	<div data-role="header">
+    	<h1>太原理工大学一键评教系统</h1>
+  	</div>
+
+  	<div data-role="content">
+  		<div>
+  			<p align="center">大道至简--无需关注微信号 只需要输入学号密码验证码即可</p>
+  		</div>
+    	<form id="subform" method="post" action="/login">
+
+		  	<label for="fname">学号:</label>
+		  	<input type="text" name="number" id="fname">
+
+		  	
+		  	<label for="fname">密码:</label>
+		  	<input type="password" name="password" id="fname">
+		    
+			<label for="fname" style="display:inline;">验证码:</label>
+			<img src="/getCheckImg"  style="display:inline;">
+		  	<input type="text" name="checkimg" id="fname">
+			
+			<!-- <button type="submit" id="ok">提交</button> -->
+			<a href="#myPopupDialog" data-rel="popup" class="ui-btn"  onclick="final()"  style="text-decoration:none;"><button>提交</button></a>
+
+		</form>
+
+  	</div>
+
+  	<div data-role="footer">
+    	<h1>开发者MrPei  QQ:756487195</h1>
+  	</div>
+
+  	<div data-role="popup" id="myPopupDialog">
+		 <div data-role="header">
+		 	<h1>系统提示</h1>
+		 </div>
+		 <div data-role="main" class="ui-content">
+		 	<p>评教系统运行中......请在出现成功提示后再关闭！</p>
+		 <div data-role="footer"><h1>如果评教系统出现问题请与开发者联系</h1></div>
+	</div>
+
+</div>
+</body>
+<!-- 定时器-->
+<script type="text/javascript">
+	function final(){
+		setTimeout("submit()",2000);
+	}
+	function submit(){
+		document.getElementById('subform').submit();
+	}
+</script>
+
+</html>

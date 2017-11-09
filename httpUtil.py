@@ -50,59 +50,32 @@ def getCourseList():
 
     html = response.read().decode('GBK')
     #正则匹配获取每门课具体的信息用来构造后面用到的post请求体
-    html_select = re.findall('<img name="(\d+)#@(.+?)#@(.+?)#@.+?#@(.+?)#@(.+?)"', html)
+    html_select = re.findall('<img name="(\d+)#@(.+)#@(.+)#@(.+)#@(.+)#@(.+)"', html)
     print(len(html_select))
     for n in range(len(html_select)):
         wjbm = html_select[n][0]
         bpr = html_select[n][1]
         html_select[n][3]
-        pgnr = html_select[n][4]
+        pgnr = html_select[n][5]
 
         bprm = html_select[n][2]
-        pgnrm = html_select[n][3]
+        pgnrm = html_select[n][4]
 
         # print(html_select[n][0])
         # print(html_select[n][1])
         # print(html_select[n][2])
-        # print(html_select[n][3])
+        #print(html_select[n][4])
         # print(html_select[n][4])
-        #
-        # print('------------------')
+        # print(html_select[n][5])
+
+        print('------------------')
 
 
 
         beforeSendInfo(wjbm,bpr,pgnr,bprm,pgnrm)
         sendInfo(wjbm,bpr,pgnr)
-        time.sleep(1)
+        #time.sleep(1)
 
-
-def get_paper_form_postdata(wjbm,bpr,pgnr,L = []):
-    if len(L) == 0:
-        postDict = {
-            'wjbm': wjbm,
-            'bpr': bpr,
-            'pgnr': pgnr,
-            'oper': 'wjShow',
-            # 'wjmc':'2014-2015-2%CC%E5%D3%FD%BF%CE',      #fuck !     what the hell is that!
-            # 'bprm':'%CE%E2%B1%F6',                                                                     #fuck !     what the hell is that!
-            # 'pgnrm':'%CC%E5%D3%FD%A3%A8%B6%FE%A3%A9',                  #fuck !     what the hell is that!
-            'pageSize': '20',
-            'page': '1',
-            'currentPage': '1',
-            'pageNo': ''
-        }
-    else:
-        postDict = {
-            'wjbm': wjbm,
-            'bpr': bpr,
-            'pgnr': pgnr,
-            #  'zgpj':
-        }
-        for x in L:
-            postDict[x] = '10_1'  # 默认全都是最好想修改去urp看每个评级的值
-
-    postData = urllib.parse.urlencode(postDict).encode()
-    return postData
 
 
 
@@ -119,12 +92,22 @@ def beforeSendInfo(wjbm,bpr,pgnr,bprm,pgnrm):
         'Accept-Encoding': 'gzip, deflate',
         # 'Host': '',
     }
+    print("请求前操作")
+    print("wjbm---"+wjbm)
+    print("bpr---" + bpr)
+    print("pgnr---" + pgnr)
+    print("oper---" + "wjShow")
+    print("wjmc---" + '2017-2018学年秋季学期期中评教')
+    print("bprm---" + bprm)
+    print("pgnrm---" + pgnrm)
+    print("wjbm---" + wjbm)
+
     postdata = urllib.parse.urlencode({
         'wjbm': wjbm,
         'bpr': bpr,
         'pgnr': pgnr,
         'oper': 'wjShow',
-        'wjmc': '2016-2017学年第一学期学生期末评教',
+        'wjmc': '2017-2018学年秋季学期期中评教',
         'bprm': bprm,
         'pgnrm':pgnrm,
         'pageSize': '20',
@@ -142,7 +125,8 @@ def beforeSendInfo(wjbm,bpr,pgnr,bprm,pgnrm):
     response = opener.open(req)
 
     #print(response.read().decode('GBK'))
-    #print(response.read())
+    print(response.read())
+
     return response.read()
 
 
@@ -165,10 +149,7 @@ def sendInfo(wjbm,bpr,pgnr):
         'wjbm': wjbm,
         'bpr': bpr,
         'pgnr': pgnr,
-        '0000000136':'25_0.95',
-        '0000000137':'25_0.95',
-        '0000000138':'30_0.95',
-        '0000000139':'20_0.95',
+        '0000000045':'10_1',
         'zgpj':stringGBK,
 
     }).encode('GBK')

@@ -1,7 +1,7 @@
 
 JWCURL = "http://219.226.101.61/jiawu3.html"
 #主url
-URL = "http://202.207.247.49/"
+URL = "http://202.207.247.51:8065/"
 URL2 = "http://202.207.247.44:8064/"
 URL3 = "http://202.207.247.44:8065/"
 URL4 = "http://202.207.247.44:8069/"
@@ -33,7 +33,7 @@ URL_TZGG = "detail.asp?bigid=7"
 URL_JWC = "http:#jwc.tyut.edu.cn/"
 #评教列表
 URL_JXPG_LIST = "jxpgXsAction.do?oper=listWj"
-#具体评估
+#具体评估 POST地址
 URL_JXPG = "jxpgXsAction.do?oper=wjpg"
 #评估页面
 URL_PG = "jxpgXsAction.do"
